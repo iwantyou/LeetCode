@@ -17,55 +17,26 @@ public class Main2 {
 		int[] num={1,1,1};
 		System.out.println(main2.rob(num));
 	}
-	/*
-	 * 0:index
-	 * 1:money
-	 * 		
-	 * 
-	 */
+	
 	public int rob(int[] nums) {
 		if(nums==null||nums.length==0) return 0;
 		int len=nums.length;
 		if(len==1) return nums[0];
 		if(len==2) return Math.max(nums[0],nums[1]);
 		
-		int[] in=new int[2];
-		List<int[]> f=new ArrayList<>();
-		in[0]=0;
-		in[1]=nums[0];
-		f.add(in);
-		int[] in2=new int[2];
+		
+		int[]f=new int[len]; 
+		f[0]=nums[0];
 		if(nums[0]<nums[1]){
-			in2[0]=1;
-			in2[1]=nums[1];
+			
+			f[1]=nums[1];
 		}else{
-			in2[0]=0;
-			in2[1]=nums[0];
+			f[1]=nums[0];
 		}
-		f.add(in2);
-		
 		for(int i=2;i<len;i++){
-			int[] in3=new int[2];
-			int[]n=f.get(i-1);
-			int index=n[0];
-			int money=n[1];
-			if(index!=i-1){
-				in3[0]=i;
-				in3[1]=money+nums[i];
-			}else{
-				int p_money=f.get(i-2)[1];
-				
-				if(p_money+nums[i]>money){
-					in3[0]=i;
-					in3[1]=p_money+nums[i];
-				}else{
-					in3[0]=index;
-					in3[1]=money;
-				}
-			}
-			f.add(in3);
+			f[i]=Math.max(f[i-1], f[i-2]+nums[i]);
 		}
 		
-        return f.get(len-1)[1];
+        return f[len-1];
     }
 }

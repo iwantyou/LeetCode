@@ -2,6 +2,8 @@ package leet;
 
 /**
  * Created by wangwenhui03 on 17/2/18.
+Leetcode 106
+根据中序和后序遍历重建二叉树
  */
 class TreeNode {
       int val;

@@ -1,0 +1,40 @@
+reated by wangwenhui03 on 17/2/19.
+ */
+//Leetcode 34 非递减序列（有重复）求指定数字的下标范围--二分法的变形
+public class Main34 {
+    public static void main(String[] args){
+       
+    }
+    public int[] searchRange(int[] nums, int target) {
+        System.out.println(findLeft(nums,target,0,nums.length-1));
+        int left = findLeft(nums,target,0,nums.length-1);
+        int right =findRight(nums,target,0,nums.length-1);
+        int[] res={left,right};
+        return res;
+    }
+    public int findLeft(int[] nums,int target,int i,int j){
+        if(i>j) return -1;
+        int mid = (i+j)/2;
+        int tmp = nums[mid];
+        if(tmp<target) return findLeft(nums,target,mid+1,j);
+        if(tmp>target) return findLeft(nums,target,i,mid-1);
+        if(tmp==target&&mid>=1&&nums[mid-1]==target){
+            return findLeft(nums,target,i,mid-1);
+        }
+        if(tmp==target) return mid;
+        return -1;
+    }
+    public int findRight(int[] nums,int target,int i,int j){
+        if(i>j) return -1;
+        int mid = (i+j)/2;
+        int tmp = nums[mid];
+        if(tmp<target) return findRight(nums,target,mid+1,j);
+        if(tmp>target) return findRight(nums,target,i,mid-1);
+        if(tmp==target&&mid+1<nums.length&&nums[mid+1]==target){
+            return findRight(nums,target,mid+1,j);
+        }
+        if(tmp==target) return mid;
+        return -1;
+    }
+}
+
